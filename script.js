@@ -9,22 +9,21 @@ const users = [
 // TASK #1
 console.log("TASK #1");
 
-let salarySumm = 0;
-users.forEach(user => {
-  salarySumm += user.salary;
-});
+const salarySumm = users.reduce((acc, user) => {
+  return acc + user.salary;
+}, 0);
 
 console.log(salarySumm);
 
 // TASK #2
 console.log("TASK #2");
 
-let activeSalarySumm = 0;
-users
-  .filter(user => user.active === true)
-  .forEach(user => {
-    activeSalarySumm += user.salary;
-  });
+const activeSalarySumm = users.reduce((acc, user) => {
+  if (user.active) {
+    acc += user.salary;
+  }
+  return acc;
+}, 0);
 
 console.log(activeSalarySumm);
 
@@ -88,7 +87,9 @@ const highestSalary = users.reduce((acc, user) => {
   return acc;
 }, 0);
 
-console.log(highestSalary);
+const highestSalaryUser = users.filter(user => user.salary === highestSalary);
+
+console.log(highestSalaryUser);
 
 // TASK #8
 console.log("TASK #8");
@@ -111,7 +112,12 @@ console.log(ageGroups);
 // TASK #9
 console.log("TASK #9");
 
-const nameLength = users.map(user => user.name.length);
+const nameLength = users.reduce((acc, user) => {
+  if (user.active) {
+    acc.push(user.name.length);
+  }
+  return acc;
+}, []);
 
 console.log(nameLength);
 
